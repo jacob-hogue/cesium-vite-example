@@ -1,10 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <div id="cesiumContainer"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <title>CesiumJS: Display a Scene</title>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <script src="https://unpkg.com/@esri/arcgis-rest-request@4.0.0/dist/bundled/request.umd.js"></script>
+  <script src="https://unpkg.com/@esri/arcgis-rest-feature-service@4.0.0/dist/bundled/feature-service.umd.js"></script>
+  <script type="module" src="/src/main.js"></script>
+  <script src="./functions.js"></script>
+</head>
+
+<body>
+  <div id="cesiumContainer"></div>
+  <script type="module">
+    // WORKING HERE 
+    document.body.appendChild(LoadDataButton());
+    //
+  </script>
+</body>
+
 </html>
