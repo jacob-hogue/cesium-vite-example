@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/CesiumGS/cesium-vite-example.git"
+    "url": "https://github.com/jacob-hogue/cesium-vite-example.git"
   },
   "type": "module",
   "scripts": {
