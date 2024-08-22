@@ -1,43 +1,60 @@
+import * as Cesium from 'cesium';
 import {
   Cartesian3,
   Math as CesiumMath,
-  Terrain,
   Viewer,
+  Terrain,
   createOsmBuildingsAsync,
+  Ion,
+  JulianDate,
+  SampledPositionProperty,
+  TimeIntervalCollection,
+  TimeInterval,
+  PathGraphics,
+  PolylineGlowMaterialProperty,
+  Quaternion,
+  Matrix3,
+  Color,
+  Rectangle,
 } from "cesium";
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "./style.css";
 
-
-const LoadDataButton = () => {
+// LoadDataButton Component
+export const LoadDataButton = () => {
   const renderButton = () => {
-    let button = document.createElement('button');
-    button.appendChild(document.createTextNode('Upload GeoJSON Data'));
-    button.className = 'loadData';
-    button.style.cssText = 'outline:none; width:300px; border-width:1px; color:Gainsboro; background:#1E90FF; height:36px; position: fixed;top: 10%;left: 20%;transform: translate(-50%, -50%);font-size:24px; border-radius:100px padding:14px; box-shadow:rgba(0, 0, 0, 0.24) 0px 3px 8px; '
-    button.addEventListener('click', FileSelector);
-    return button
-  }
+    const button = document.createElement("button");
+    button.appendChild(document.createTextNode("Upload GeoJSON Data"));
+    button.className = "loadData";
+    button.style.cssText =
+      "outline:none; width:300px; border-width:1px; color:Gainsboro; background:#1E90FF; height:36px; position: fixed;top: 10%;left: 20%;transform: translate(-50%, -50%);font-size:24px; border-radius:100px padding:14px; box-shadow:rgba(0, 0, 0, 0.24) 0px 3px 8px; ";
+    button.addEventListener("click", FileSelector);
+    return button;
+  };
+
   const renderContainer = () => {
-    const div = document.createElement('div');
+    const div = document.createElement("div");
     div.appendChild(renderButton());
     return div;
-  }
+  };
+
   return renderContainer();
-}
+};
 
+// File Selector
 const FileSelector = () => {
-  let fileUpload = document.createElement('input')
-  fileUpload.type = 'file';
+  const fileUpload = document.createElement("input");
+  fileUpload.type = "file";
   fileUpload.click();
-  fileUpload.addEventListener('change', () => fileUploadReader(event));
-}
+  fileUpload.addEventListener("change", fileUploadReader);
+};
 
+// File Reader
 const fileUploadReader = (event) => {
   const reader = new FileReader();
   reader.onload = () => geoJSONtoCesium(reader.result);
   reader.readAsText(event.target.files[0]);
-}
+};
 
 const runCesiumApp = async (flightData) => {
   const apiKey = "AAPK46fca18c184143bbb5ac9ade6aa657ecEvGup0YLGB3ZDZ8pJEG2X05Ra24c5SboTPVPiosdNWgsU3yTyhAcEQQy7_Lm8Qli";
@@ -180,16 +197,18 @@ const runCesiumApp = async (flightData) => {
   });
 }
 
+// Convert GeoJSON to Cesium Data
 const geoJSONtoCesium = (geoJSONstring) => {
-  let cesiumData = [];
   const geoJSON = JSON.parse(geoJSONstring);
-  cesiumData = geoJSON.features.map(d => ({
-    longitude: d.geometry.coordinates[0], 
-    latitude: d.geometry.coordinates[1], 
-    height: d.geometry.coordinates[2]
+  const cesiumData = geoJSON.features.map((d) => ({
+    longitude: d.geometry.coordinates[0],
+    latitude: d.geometry.coordinates[1],
+    height: d.geometry.coordinates[2],
   }));
+
   console.log(cesiumData);
   runCesiumApp(cesiumData);
-}
+};
 
-
+// Initialize Button
+document.body.appendChild(LoadDataButton());
