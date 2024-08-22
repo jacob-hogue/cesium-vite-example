@@ -26,4 +26,12 @@ export default defineConfig({
       ],
     }),
   ],
+  build: {
+    rollupOptions: {
+      external: ['protobufjs/dist/minimal/protobuf.js'],
+    },
+  },
+  esbuild: {
+    external: ['protobufjs/dist/minimal/protobuf.js'],
+  },
 });
