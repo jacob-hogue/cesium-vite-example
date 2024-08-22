@@ -9,16 +9,16 @@
   <script src="https://unpkg.com/@esri/arcgis-rest-request@4.0.0/dist/bundled/request.umd.js"></script>
   <script src="https://unpkg.com/@esri/arcgis-rest-feature-service@4.0.0/dist/bundled/feature-service.umd.js"></script>
   <script type="module" src="/src/main.js"></script>
-  <script src="./functions.js"></script>
 </head>
 
 <body>
   <div id="cesiumContainer"></div>
   <script type="module">
     // WORKING HERE 
+    // Ensure LoadDataButton is defined before calling it
+    import { LoadDataButton } from '/src/main.js';
     document.body.appendChild(LoadDataButton());
     //
   </script>
 </body>
-
 </html>
